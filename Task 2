@@ -1,0 +1,86 @@
+
+#include <iostream>
+using namespace std;
+
+struct sch
+{
+    string surname;
+    int score;
+};
+
+int main()
+{
+    setlocale(LC_ALL, "");
+
+    int n; 
+    float sum = 0;
+    cout << "Введите количество учеников в классе: " << endl;
+    cin >> n;
+
+    int *dvNum = new int[n];
+    int dvCou = 0;
+
+    int* trNum = new int[n];
+    int trCou = 0;
+
+    int* hrNum = new int[n];
+    int hrCou = 0;
+
+    int* otNum = new int[n];
+    int otCou = 0;
+
+    sch *scho = new sch[n];
+
+    for (int i = 0; i < n; i++)
+    {
+        cout << "Введите фамилию и оценку " << i + 1 << " ученика: " <<  endl;
+        cin >> scho[i].surname >> scho[i].score;
+        if (scho[i].score == 2)
+        {
+            dvNum[dvCou] = i;
+            dvCou++;
+        }
+        if (scho[i].score == 3)
+        {
+            trNum[trCou] = i;
+            trCou++;
+        }
+        if (scho[i].score == 4)
+        {
+            hrNum[hrCou] = i;
+            hrCou++;
+        }
+        if (scho[i].score == 5)
+        {
+            otNum[otCou] = i;
+            otCou++;
+        }
+        if (scho[i].score <= 5 && scho[i].score > 1) sum += scho[i].score;
+    }
+    for (int i = 2; i <= 5; i++)
+    {
+        if (i == 2)
+        {
+            cout << "Двоечники: ";
+            for (int d = 0; d < dvCou; d++) cout << scho[dvNum[d]].surname << ' ';
+        }
+        if (i == 3)
+        {
+            cout << endl << "Троечники: ";
+            for (int t = 0; t < trCou; t++) cout << scho[trNum[t]].surname << ' ';
+        }
+        if (i == 4)
+        {
+            cout << endl << "Хорошисты: ";
+            for (int h = 0; h < hrCou; h++) cout << scho[hrNum[h]].surname << ' ';
+        }
+        if (i == 5)
+        {
+            cout << endl << "Отличники: ";
+            for (int o = 0; o < otCou; o++) cout << scho[otNum[o]].surname << ' ';
+        }
+    }
+    cout << endl << "Средний балл по классу: " << sum / (dvCou + trCou + hrCou + otCou) << endl;
+
+    system("pause");
+}
